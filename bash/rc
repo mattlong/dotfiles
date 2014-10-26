@@ -1,0 +1,129 @@
+#!/bin/bash
+rcfiles=$HOME/.homesick/repos/dotfiles/bash
+system=`$rcfiles/system`
+
+# Set flag if this session is interactive
+if [ -n "$PS1" ]; then
+    INTERACTIVE_SESSION=true
+fi
+
+# setup homeshick
+source $HOME/.homesick/repos/homeshick/homeshick.sh
+
+# source local environment settings
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi
+
+# source color aliases
+source $rcfiles/colors
+
+# source aliases
+source $rcfiles/aliases
+
+# source bash completion
+source $rcfiles/completion
+
+# source platform-specific bashrc
+if [ "$system" == "Linux" ]; then
+    source $rcfiles/rc.linux
+elif [ "$system" == "OSX" ]; then
+    source $rcfiles/rc.osx
+fi
+
+# set hostname var
+if [ ! -n "$HOSTNAME" ]; then
+    HOSTNAME=`hostname -s`
+fi
+
+# fix sorting of ls: dotfiles first
+export LC_ALL="C"
+
+#set bash to vi mode
+set -o vi
+
+# set default editor to Vim
+export EDITOR=vim
+
+# ignore some controlling instructions
+# HISTIGNORE is a colon-delimited list of exclusions
+# the '&' is a special pattern which suppresses duplicate entires
+export HISTIGNORE=$'[ \t*:&:[fb]g:exit:ls'
+
+# don't put duplicate lines or lines starting with a space in history
+export HISTCONTROL=ignoreboth
+
+export HISTSIZE=32768
+export HISTFILESIZE=$HISTSIZE
+
+# append to the history file instead of overwrite
+shopt -s histappend
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# case insensitive globbing (used in pathname expansion)
+shopt -s nocaseglob
+
+# autocorrect typos in path names when using cd
+shopt -s cdspell
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# enable some bash 4 features when possible:
+# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
+# * recursive globbing, e.g. `echo **/*.txt`
+for option in autocd globstar; do
+    shopt -s "$option" 2> /dev/null
+done
+
+
+if $INTERACTIVE_SESSION; then
+    # autostart tmux
+    if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
+    then
+        export STARTED_TMUX=1
+        ~/.local/bin/tmux-shared remote
+        echo "tmux failed to start"
+    fi
+
+    # activate virtualenvwrapper
+    if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+        source /usr/local/bin/virtualenvwrapper.sh
+    elif [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
+        source /usr/bin/virtualenvwrapper.sh
+    fi
+
+    # setup prompt
+    GIT_PS1_SHOWDIRTYSTATE=true
+
+    # old PS1
+    #PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+
+    PS1=""
+    # username@host
+    PS1=$PS1"${txtcyn}\u${txtblu}@${bldpur}\h${txtwht}:"
+
+    # stopped process count
+    PS1=$PS1${txtylw}'$( if [ $(jobs -s | wc -l) -gt 0 ]; then echo "[\j]"; fi )'
+
+    # current directory
+    PS1=$PS1"${bldblu}\w"
+
+    # git branch
+    if type __git_ps1 >/dev/null 2>&1; then
+        PS1=$PS1${txtylw}'$(__git_ps1 " (%s)")'
+    fi
+
+    # finish it
+    PS1=$PS1"${txtwht}\$ ${txtdef}"
+
+    export PATH="$HOME/bin:$PATH"
+    export AWS_CREDENTIAL_FILE=~/.aws_credentials
+    export GREP_OPTIONS='--exclude-dir=.svn'
+fi
+
+unset rcfiles
+unset system

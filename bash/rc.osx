@@ -1,0 +1,30 @@
+#!/bin/bash
+    # Set the custom prompt
+export CLICOLOR=1
+export LSCOLORS="gxfxcxdxbxegedabagacad"
+
+# Use GNU coreutils instead of system defaults
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+
+# Add GNU coreutils to default man path
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+# Brew packages need to be in path before system packages
+export PATH="/usr/local/bin:$PATH"
+
+if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
+    if [ -f ~/.dir_colors ]; then
+        eval `dircolors ~/.dir_colors`
+    else
+        eval `dircolors -b`
+    fi
+	alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --color=auto'
+else
+    alias ls='ls -hG'
+fi
+
+# Add git abilities to prompt
+source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+
+# Add bash completion
+source $(brew --prefix)/etc/bash_completion

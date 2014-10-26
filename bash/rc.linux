@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    if [ -f ~/.dir_colors ]; then
+        eval `dircolors ~/.dir_colors`
+    else
+        eval `dircolors -b`
+    fi
+    alias ls='/bin/ls --color=auto'
+fi
+
+# Source git completion settings
+source $HOME/.local/bin/git-prompt.sh
+source $HOME/.local/bin/git-completion.bash
