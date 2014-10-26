@@ -40,7 +40,7 @@ fi
 export LC_ALL="C"
 
 #set bash to vi mode
-set -o vi
+#set -o vi
 
 # set default editor to Vim
 export EDITOR=vim
@@ -82,12 +82,15 @@ done
 
 if $INTERACTIVE_SESSION; then
     # autostart tmux
-    if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
-    then
-        export STARTED_TMUX=1
-        ~/.local/bin/tmux-shared remote
-        echo "tmux failed to start"
+    if [ "$TMUX" == "" ]; then
+        tmux attach || tmux || true
     fi
+    #if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
+    #then
+    #    export STARTED_TMUX=1
+    #    ~/.local/bin/tmux-shared remote
+    #    echo "tmux failed to start"
+    #fi
 
     # activate virtualenvwrapper
     if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
