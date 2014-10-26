@@ -107,13 +107,13 @@ if $INTERACTIVE_SESSION; then
 
     PS1=""
     # username@host
-    PS1=$PS1"${txtcyn}\u${txtblu}@${bldpur}\h${txtwht}:"
+    PS1=$PS1"${txtgrn}\u${txtblu}@${bldpur}\h${txtwht}:"
 
     # stopped process count
     PS1=$PS1${txtylw}'$( if [ $(jobs -s | wc -l) -gt 0 ]; then echo "[\j]"; fi )'
 
     # current directory
-    PS1=$PS1"${bldblu}\w"
+    PS1=$PS1"${bldcyn}\w"
 
     # git branch
     if type __git_ps1 >/dev/null 2>&1; then
