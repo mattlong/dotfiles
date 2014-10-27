@@ -43,7 +43,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.o,*.obj,.git,*.pyc,node_modules
 set tabstop=4 shiftwidth=4      " a tab is four spaces
 set expandtab                   " use spaces, not tabs
 set backspace=indent,eol,start  " backspace through everything in insert mode
-
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
 "" Searching
 set hlsearch                    " highlight matches
