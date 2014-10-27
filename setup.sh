@@ -5,4 +5,7 @@ fi
 
 if [ ! -d $HOME/.homesick/repos/dotfiles ]; then
     $HOME/.homesick/repos/homeshick/bin/homeshick clone mattlong/dotfiles
+else
+    echo "To link dotfiles, run:"
+    echo "$HOME/.homesick/repos/homeshick/bin/homeshick link mattlong/dotfiles"
 fi
