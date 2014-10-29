@@ -1,15 +1,13 @@
 #!/bin/bash
-    # Set the custom prompt
+
 export CLICOLOR=1
-export LSCOLORS="gxfxcxdxbxegedabagacad"
+export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Use GNU coreutils instead of system defaults
 export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-
-# Add GNU coreutils to default man path
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-# Brew packages need to be in path before system packages
+# homebrew stuff
 export PATH="/usr/local/bin:$PATH"
 
 if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
@@ -23,8 +21,43 @@ else
     alias ls='ls -hG'
 fi
 
-# Add git abilities to prompt
-source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+if [ -f /usr/local/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
+    source $(brew --prefix)/etc/bash_completion
+else
+    echo "WARNING: bash-completion missing."
+    echo "To fix: brew install bash-completion"
+fi
 
-# Add bash completion
-source $(brew --prefix)/etc/bash_completion
+if [ -f ~/.aws_credentials ]; then
+    source ~/.aws_credentials
+fi
+
+if [ -f ~/.env_box_view ]; then
+    source ~/.env_box_view
+fi
+
+if type "mvim" &> /dev/null; then
+    alias vim='mvim -v'
+fi
+
+box_to_use="box-view"
+alias v="vagrant"
+alias doge="cd ~/vagrant/dogetrader; vagrant up; vagrant ssh"
+alias box="cd ~/vagrant/box-view; vagrant up; vagrant ssh"
+alias vu="cd ~/vagrant/${box_to_use}; vagrant up"
+alias vh="cd ~/vagrant/${box_to_use}; vagrant halt"
+alias vs="cd ~/vagrant/${box_to_use}; vagrant ssh"
+
+#TODO go through this...
+export SPARK_TOKEN=58af3a592549c450391a7b467de56ef55bfa4b77
+export SPARK_DEVICE_ID=53ff6c065075535117311387
+export UWSGI_VASSAL_DIR=/etc/vassals
+export MATTLONG_KEY=/home/ubuntu/.ssh/matt-key.pem
+export MATTLONG_PATH=/home/ubuntu/www/mattlong
+export MATTLONG_ORG_STATIC_PATH="/home/ubuntu/www/mattlong-static"
+export MATTLONG_ORG_PRODUCTION="true"
+export OAUTH_EMAIL_MAP='{"beaver08@gmail.com":"matt@crocodoc.com"}'
+export GOOGLE_API_CLIENT_ID="38729899338-0r0b2vtkogqsgaeov078ancv9uqiveam.apps.googleusercontent.com"
+export GOOGLE_API_CLIENT_SECRET="UCEO1Fn_h87HJ9VvZ3Ulw1oH"
+export MATTLONG_ORG_SECRET_KEY="paOG\3;w.!h^6}O_fJ]?cr]N4S9D{}5t+U~4/:w_Z5XL^cdt}47"
