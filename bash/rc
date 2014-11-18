@@ -81,19 +81,6 @@ done
 
 
 if $INTERACTIVE_SESSION; then
-    if type "tmux" &> /dev/null; then
-        # TMUX will have info in it if we're already in a TMUX session
-        if [ "$TMUX" == "" ]; then
-            tmux attach || tmux || true
-        fi
-        #if [ "$PS1" != "" -a "${STARTED_TMUX:-x}" = x -a "${SSH_TTY:-x}" != x ]
-        #then
-        #    export STARTED_TMUX=1
-        #    ~/.local/bin/tmux-shared remote
-        #    echo "tmux failed to start"
-        #fi
-    fi
-
     # activate virtualenvwrapper
     if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
         source /usr/local/bin/virtualenvwrapper.sh
