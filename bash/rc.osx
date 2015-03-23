@@ -8,7 +8,7 @@ export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # homebrew stuff
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
     if [ -f ~/.dir_colors ]; then
