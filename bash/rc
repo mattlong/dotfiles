@@ -96,7 +96,7 @@ if $INTERACTIVE_SESSION; then
 
     PS1=""
     # username@host
-    PS1=$PS1"${bldgrn}\u${txtwht}@${bldcyn}\h${txtwht}:"
+    PS1=$PS1"${bldgrn}\u${txtwht}@${bldcyn}\H${txtwht}:"
 
     # stopped process count
     PS1=$PS1${txtylw}'$( if [ $(jobs -s | wc -l) -gt 0 ]; then echo "[\j]"; fi )'
