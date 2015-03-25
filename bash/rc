@@ -118,5 +118,8 @@ if $INTERACTIVE_SESSION; then
     export SVN_EDITOR=vim
 fi
 
+# Scala settings
+export SBT_OPTS="-XX:PermSize=2G -XX:MaxPermSize=2G -Xmx2G -XX:ReservedCodeCacheSize=64m -XX:+CMSClassUnloadingEnabled"
+
 unset rcfiles
 unset system
