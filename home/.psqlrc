@@ -1,3 +1,5 @@
+# from https://github.com/aanari/dotfiles/blob/master/config/psqlrc
+
 \set QUIET ON
 
 \set HISTFILE ~/.psql_history- :HOST - :DBNAME
