@@ -114,12 +114,15 @@ if $INTERACTIVE_SESSION; then
 
     export PATH="$HOME/bin:$PATH"
     export AWS_CREDENTIAL_FILE=~/.aws_credentials
-    export GREP_OPTIONS='--exclude-dir=.svn'
+    #NOTE GREP_OPTIONS is depricated
+    #export GREP_OPTIONS='--exclude-dir=.svn'
     export SVN_EDITOR=vim
 fi
 
 # Scala settings
 export SBT_OPTS="-XX:PermSize=2G -XX:MaxPermSize=2G -Xmx2G -XX:ReservedCodeCacheSize=64m -XX:+CMSClassUnloadingEnabled"
+
+export PGDATA="/usr/local/var/postgres"
 
 unset rcfiles
 unset system

@@ -1,3 +1,5 @@
+alias docker='docker --tls'
+
 # yolo = sudo
 alias yolo='sudo'
 
@@ -31,9 +33,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
+alias c='cd /box/www/current_local'
 
 # Unicode gpg
 alias gpg='gpg2 --display-charset utf-8'
+
+alias grep='grep --exclude-dir=.svn --exclude-dir=.git'
 
 # Use OS X specific config file for Tmux
 #if command -v reattach-to-user-namespace &>/dev/null; then

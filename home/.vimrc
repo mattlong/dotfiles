@@ -4,6 +4,8 @@ syntax enable                   " enable syntax highlighting
 set encoding=utf-8              " use unicode
 set showcmd                     " display incomplete commands
 set hidden                      " allow unsaved files to be put in background
+filetype on
+filetype plugin on
 filetype plugin indent on       " load file type plugins + indentation
 
 set laststatus=2                " show status line (0 - never, 1 - default, 2 - always)
@@ -36,7 +38,7 @@ let mapleader = ','
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_height = 30
-set wildignore+=*/tmp/*,*.so,*.swp,*.o,*.obj,.git,*.pyc,node_modules
+set wildignore+=*/tmp/*,*.so,*.swp,*.o,*.obj,.git,*.pyc,*.class,node_modules
 
 
 "" Whitespace

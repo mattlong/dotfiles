@@ -1,0 +1,11 @@
+[ui]
+username = Matt Long <matt@mattlong.org>
+
+[extensions]
+hgext.bookmarks =
+hggit =
+strip =
+record =
+shelve =
+color =
+graphlog =

@@ -12,6 +12,10 @@ if [[ $system == "MINGW32_NT-6.1" ]]; then
 	printf 'MinGW'
 	exit 0
 fi
+if [[ $system =~ "CYGWIN_NT-6.1" ]]; then
+    printf 'Cygwin'
+    exit 0
+fi
 
-printf 'Unknown system' > &2
+printf 'Unknown system' >&2
 exit 1
