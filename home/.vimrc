@@ -1,3 +1,7 @@
+"" Pathogen
+call pathogen#infect()
+
+
 "" General
 set nocompatible                " break vi compatibility
 syntax enable                   " enable syntax highlighting
@@ -19,7 +23,10 @@ endif
 
 set cursorline                  " highlight current line
 if has("gui_macvim") || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-    colorscheme xoria256        " which colorscheme to use
+    "colorscheme xoria256        " which colorscheme to use
+
+    set background=dark
+    colorscheme solarized
 endif
 
 
@@ -27,10 +34,6 @@ endif
 nmap ; :
 nnoremap j gj
 nnoremap k gk
-
-
-"" Pathogen
-call pathogen#infect()
 
 
 "" CtrlP
@@ -58,3 +61,12 @@ set smartcase                   " ... unless they contain at least one capital l
 let g:omni_sql_no_default_maps = 1 " disable SQL syntax keyboard shortcuts
 
 map <leader>gt :call TimeLapse() <cr>
+
+
+"" copy/paste with system clipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
