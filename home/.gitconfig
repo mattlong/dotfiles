@@ -1,6 +1,6 @@
 [user]
     name = Matt Long
-    email = long@box.com
+    email = matt@mattlong.org
 [color]
     ui = true
 [core]
@@ -59,3 +59,9 @@
     ci = commit
     rb = rebase
 	up = "!git remote update -p; git merge --ff-only @{u}"
+[github]
+	site = https://github.com
+	endpoint = https://api.github.com
+	oauth-token = 8385b7aa880a03493e340d425b1b10508a42b18e
+[reflow]
+	git-server = GitHub

@@ -1,4 +1,4 @@
-# from https://github.com/aanari/dotfiles/blob/master/config/psqlrc
+-- from https://github.com/aanari/dotfiles/blob/master/config/psqlrc
 
 \set QUIET ON
 

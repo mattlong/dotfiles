@@ -8,4 +8,5 @@ if [ ! -d $HOME/.homesick/repos/dotfiles ]; then
 else
     echo "To link dotfiles, run:"
     echo "$HOME/.homesick/repos/homeshick/bin/homeshick link mattlong/dotfiles"
+    echo "$HOME/.homesick/repos/dotfiles/after-link.sh"
 fi

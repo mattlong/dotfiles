@@ -3,6 +3,10 @@ alias docker='docker --tls'
 # yolo = sudo
 alias yolo='sudo'
 
+# docker
+alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
+alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm -v $(docker ps -a -f status=exited -q)'
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
