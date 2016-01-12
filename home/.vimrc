@@ -23,10 +23,10 @@ endif
 
 set cursorline                  " highlight current line
 if has("gui_macvim") || $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
-    "colorscheme xoria256        " which colorscheme to use
+    colorscheme xoria256        " which colorscheme to use
 
-    set background=dark
-    colorscheme solarized
+    "set background=dark
+    "colorscheme solarized
 endif
 
 
