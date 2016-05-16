@@ -10,10 +10,6 @@ fi
 # setup homeshick
 source $HOME/.homesick/repos/homeshick/homeshick.sh
 
-# source local environment settings
-if [ -f ~/.bash_local ]; then
-    source ~/.bash_local
-fi
 
 # source color aliases
 source $rcfiles/colors
@@ -38,9 +34,6 @@ fi
 
 # fix sorting of ls: dotfiles first
 export LC_ALL="C"
-
-#set bash to vi mode
-#set -o vi
 
 # set default editor to Vim
 export EDITOR=vim
@@ -75,9 +68,9 @@ shopt -s cdspell
 # enable some bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
-    shopt -s "$option" 2> /dev/null
-done
+#for option in autocd globstar; do
+#    shopt -s "$option" 2> /dev/null
+#done
 
 
 if $INTERACTIVE_SESSION; then
@@ -110,16 +103,18 @@ if $INTERACTIVE_SESSION; then
     PS1=$PS1"${txtwht}\$ ${txtdef}"
 
     export PATH="$HOME/bin:$PATH"
-    export AWS_CREDENTIAL_FILE=~/.aws_credentials
-    #NOTE GREP_OPTIONS is depricated
-    #export GREP_OPTIONS='--exclude-dir=.svn'
+    if [ -f ~/.aws_credentials ]; then
+        source ~/.aws_credentials
+        export AWS_CREDENTIAL_FILE=~/.aws_credentials
+    fi
     export SVN_EDITOR=vim
 fi
 
-# Scala settings
-export SBT_OPTS="-XX:PermSize=2G -XX:MaxPermSize=2G -Xmx2G -XX:ReservedCodeCacheSize=64m -XX:+CMSClassUnloadingEnabled"
-
 export PGDATA="/usr/local/var/postgres"
 
-unset rcfiles
-unset system
+unset rcfiles system
+
+# source local environment settings
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi

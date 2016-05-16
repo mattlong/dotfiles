@@ -4,15 +4,15 @@ export CLICOLOR=1
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
 # Use GNU coreutils instead of system defaults
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+#export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+#export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # homebrew stuff
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
 if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
     if [ -f ~/.dir_colors ]; then
-        eval `dircolors ~/.dir_colors`
+        eval `dircolors -b ~/.dir_colors`
     else
         eval `dircolors -b`
     fi
@@ -21,68 +21,17 @@ else
     alias ls='ls -hG'
 fi
 
-if [ -f /usr/local/etc/bash_completion ]; then
-    source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
-    source $(brew --prefix)/etc/bash_completion
+brew_prefix=$(brew --prefix)
+if [ -f ${brew_prefix}/etc/bash_completion ]; then
+    . ${brew_prefix}/etc/bash_completion.d/git-prompt.sh
+    . ${brew_prefix}/etc/bash_completion
 else
     echo "WARNING: bash-completion missing."
     echo "To fix: brew install bash-completion"
 fi
+unset brew_prefix
 
-if [ -f ~/.aws_credentials ]; then
-    source ~/.aws_credentials
-fi
 
-if [ -f ~/.env_box_view ]; then
-    source ~/.env_box_view
-fi
-
-if type "mvim" &> /dev/null; then
+if which mvim &> /dev/null; then
     alias vim='mvim -v'
 fi
-
-box_to_use="box-view"
-alias v="vagrant"
-alias doge="cd ~/vagrant/dogetrader; vagrant up; vagrant ssh"
-alias box="cd ~/vagrant/box-view; vagrant up; vagrant ssh"
-alias vu="cd ~/vagrant/${box_to_use}; vagrant up"
-alias vh="cd ~/vagrant/${box_to_use}; vagrant halt"
-alias vs="cd ~/vagrant/${box_to_use}; vagrant ssh"
-
-#TODO go through this...
-export SPARK_TOKEN=58af3a592549c450391a7b467de56ef55bfa4b77
-export SPARK_DEVICE_ID=53ff6c065075535117311387
-export UWSGI_VASSAL_DIR=/etc/vassals
-export MATTLONG_KEY=/home/ubuntu/.ssh/matt-key.pem
-export MATTLONG_PATH=/home/ubuntu/www/mattlong
-export MATTLONG_ORG_STATIC_PATH="/home/ubuntu/www/mattlong-static"
-export MATTLONG_ORG_PRODUCTION="true"
-export OAUTH_EMAIL_MAP='{"beaver08@gmail.com":"matt@crocodoc.com"}'
-export GOOGLE_API_CLIENT_ID="38729899338-0r0b2vtkogqsgaeov078ancv9uqiveam.apps.googleusercontent.com"
-export GOOGLE_API_CLIENT_SECRET="UCEO1Fn_h87HJ9VvZ3Ulw1oH"
-export MATTLONG_ORG_SECRET_KEY="paOG\3;w.!h^6}O_fJ]?cr]N4S9D{}5t+U~4/:w_Z5XL^cdt}47"
-
-
-### Box stuff
-# begin devtools provisioning to setup local development
-
-# Remove any existing /box/www/devtools_readonly/bin from the path
-PATH=$(echo $PATH | sed 's/\/box\/www\/devtools_readonly\/bin[:]*//g')
-
-# Remove any existing /usr/local/bin from the path
-PATH=$(echo $PATH | sed 's/\/usr\/local\/bin[:]*//g')
-
-# Add /usr/local/bin and /box/www/devtools_readonly/bin to the top of your PATH
-export PATH=/usr/local/bin:/box/www/devtools_readonly/bin:$PATH
-# end devtools provisioning
-# begin devtools
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-export PS1="\u@\h \W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-# end devtools
-# begin devtools
-if [ -f /usr/local/etc/bash_completion ]; then
-  . /usr/local/etc/bash_completion
-fi
-# end devtools

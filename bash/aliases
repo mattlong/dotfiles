@@ -1,19 +1,11 @@
-alias docker='docker --tls'
-
-# yolo = sudo
-alias yolo='sudo'
-
-# docker
-alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
-alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm -v $(docker ps -a -f status=exited -q)'
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+if hash ack 2>/dev/null
+then
+    pass
+else
+    if hash ack-grep 2>/dev/null
+    then
+        alias ack='ack-grep'
+    fi
 fi
 
 alias ll='ls -alF'
@@ -22,14 +14,20 @@ alias l='ls -CF'
 alias lt='ls -lt'
 alias ltr='ls -ltr'
 
+# docker
+alias docker='docker --tls'
+alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
+alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm -v $(docker ps -a -f status=exited -q)'
+
 # git typos
 alias gti='git'
 alias got='git'
 alias g='git'
-alias very='git'
-alias much='git'
-alias such='git'
-alias wow='git status'
+alias tidyup='git branch --merged  | grep -v "\*" | grep -v "master\|dev\|test" | xargs -n1 git branch -d'
+#alias very='git'
+#alias much='git'
+#alias such='git'
+#alias wow='git status'
 
 # navigation
 alias ..="cd .."
@@ -37,17 +35,7 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias -- -="cd -"
-alias c='cd /box/www/current_local'
 
-# Unicode gpg
 alias gpg='gpg2 --display-charset utf-8'
 
 alias grep='grep --exclude-dir=.svn --exclude-dir=.git'
-
-# Use OS X specific config file for Tmux
-#if command -v reattach-to-user-namespace &>/dev/null; then
-#    alias tmux='tmux -f ~/.tmux.osx.conf'
-#else
-#    alias tmux='read -p "reattach-to-user-namespace is not installed.
-#Clipboard integration and launchctl will not function in Tmux." && tmux'
-#fi
