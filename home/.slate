@@ -77,10 +77,10 @@ bind pad4:ctrl;cmd  ${leftCommand}
 bind pad6:ctrl;cmd  ${rightCommand}
 bind pad8:ctrl;cmd  ${topCommand}
 bind pad2:ctrl;cmd  ${bottomCommand}
-bind pad7:ctrl;cmd  ${topLeft}
-bind pad9:ctrl;cmd  ${topRight}
-bind pad1:ctrl;cmd  ${bottomLeft}
-bind pad3:ctrl;cmd  ${bottomRight}
+bind 7:ctrl;cmd  ${topLeft}
+bind 9:ctrl;cmd  ${topRight}
+bind 1:ctrl;cmd  ${bottomLeft}
+bind 3:ctrl;cmd  ${bottomRight}
 
 # Throw
 bind 1:ctrl;alt         throw 0 resize
