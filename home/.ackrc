@@ -1,3 +1,8 @@
 --smart-case
 
 --ignore-file=ext:po
+
+--ignore-directory=is:.tox
+--ignore-directory=is:.eggs
+--ignore-directory=is:.cache
+--ignore-directory=is:.git
