@@ -1,5 +1,5 @@
 "" Pathogen
-call pathogen#infect()
+execute pathogen#infect()
 
 
 "" General
