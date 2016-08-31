@@ -1,6 +1,6 @@
 if hash ack 2>/dev/null
 then
-    pass
+    true
 else
     if hash ack-grep 2>/dev/null
     then
@@ -15,7 +15,7 @@ alias lt='ls -lt'
 alias ltr='ls -ltr'
 
 # docker
-alias docker='docker --tls'
+#alias docker='docker --tls'  # Bad for Docker for Mac
 alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
 alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm -v $(docker ps -a -f status=exited -q)'
 

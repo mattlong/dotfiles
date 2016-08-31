@@ -10,6 +10,11 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # homebrew stuff
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
+alias flushdns="sudo dscacheutil -flushcache || true &&
+                sudo killall -HUP mDNSResponder || true &&
+                sudo discoveryutil mdnsflushcache || true &&
+                sudo discoveryutil udnsflushcaches || true"
+
 if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
     if [ -f ~/.dir_colors ]; then
         eval `dircolors -b ~/.dir_colors`
