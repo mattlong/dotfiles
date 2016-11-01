@@ -112,6 +112,10 @@ fi
 
 export PGDATA="/usr/local/var/postgres"
 
+export GOPATH=$HOME/golang
+mkdir -p $GOPATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
 unset rcfiles system
 
 # source local environment settings
