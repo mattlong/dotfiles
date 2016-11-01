@@ -23,7 +23,8 @@ alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm 
 alias gti='git'
 alias got='git'
 alias g='git'
-alias tidyup='git branch --merged  | grep -v "\*" | grep -v "master\|dev\|test" | xargs -n1 git branch -d'
+alias tidyup-local='git branch --merged  | grep -v "\*" | egrep -v "^(dev|test|master|heramerge)$" | xargs -n1 git branch -d'
+alias tidyup-remote='git branch -r --merged origin/dev | egrep -v "HEAD ->" | sed "s/[ \t]*origin\///" | egrep -v "^(dev|test|master|heramerge)$"'
 #alias very='git'
 #alias much='git'
 #alias such='git'
@@ -39,3 +40,4 @@ alias -- -="cd -"
 alias gpg='gpg2 --display-charset utf-8'
 
 alias grep='grep --exclude-dir=.svn --exclude-dir=.git'
+
