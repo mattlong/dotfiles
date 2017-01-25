@@ -10,6 +10,10 @@ export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 # homebrew stuff
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
+# hardcoding output from this command bc speed
+# export DYLD_LIBRARY_PATH="$(brew --prefix openssl)/lib:$DYLD_LIBRARY_PATH"
+export DYLD_LIBRARY_PATH="/usr/local/opt/openssl/lib:$DYLD_LIBRARY_PATH"
+
 alias flushdns="sudo dscacheutil -flushcache || true &&
                 sudo killall -HUP mDNSResponder || true &&
                 sudo discoveryutil mdnsflushcache || true &&
