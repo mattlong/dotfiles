@@ -32,6 +32,9 @@ if [ ! -n "$HOSTNAME" ]; then
     HOSTNAME=`hostname -s`
 fi
 
+# so less can show unicode characters
+export LESSCHARSET=utf-8
+
 # fix sorting of ls: dotfiles first
 export LC_ALL="C"
 
@@ -41,13 +44,13 @@ export EDITOR=vim
 # ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of exclusions
 # the '&' is a special pattern which suppresses duplicate entires
-export HISTIGNORE=$'[ \t*:&:[fb]g:exit:ls'
+export HISTIGNORE=$'[ \t*:&:[fb]g:exit:ls *:git lg *:cd *:git push *'
 
 # don't put duplicate lines or lines starting with a space in history
-export HISTCONTROL=ignoreboth
-
-export HISTSIZE=32768
+export HISTCONTROL=ignoreboth:erasedups
+export HISTSIZE=10000
 export HISTFILESIZE=$HISTSIZE
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # append to the history file instead of overwrite
 shopt -s histappend
@@ -103,10 +106,6 @@ if $INTERACTIVE_SESSION; then
     PS1=$PS1"${txtwht}\$ ${txtdef}"
 
     export PATH="$HOME/bin:$PATH"
-    if [ -f ~/.aws_credentials ]; then
-        source ~/.aws_credentials
-        export AWS_CREDENTIAL_FILE=~/.aws_credentials
-    fi
     export SVN_EDITOR=vim
 fi
 

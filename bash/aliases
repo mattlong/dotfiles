@@ -16,8 +16,11 @@ alias ltr='ls -ltr'
 
 # docker
 #alias docker='docker --tls'  # Bad for Docker for Mac
+
 alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
-alias docker-rm-exited='test ! $(docker ps -a -f status=exited -q) || docker rm -v $(docker ps -a -f status=exited -q)'
+
+#alias docker-rm-exited='exited=$(docker ps -a -f status=exited -q) bash -c '"'"'test -z "$exited" || docker rm "$exited"'"'"''
+alias docker-rm-exited='docker rm $(docker ps -a -f status=exited -q)'
 
 # git typos
 alias gti='git'

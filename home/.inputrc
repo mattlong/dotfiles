@@ -1,7 +1,8 @@
+#bind 'set-enable-bracketed-paste off'
+
 # This file sets all readline applications to use vi keybindings
 
 # set editing-mode vi
-
 $if mode=vi
 
     # Command Mode
