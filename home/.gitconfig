@@ -1,6 +1,6 @@
 [user]
     name = Matt Long
-    email = matt.long@plangrid.com
+    email = mattlong@ycombinator.com
 [color]
     ui = true
 [core]
@@ -59,6 +59,9 @@
     ci = commit
     rb = rebase
 	up = "!git remote update -p; git merge --ff-only @{u}"
+  ignore = update-index --skip-worktree
+  unignore = update-index --no-skip-worktree
+  ignored = !git ls-files -v | grep "^[[:lower:]]"
 [github]
 	site = https://github.com
 	endpoint = https://api.github.com

@@ -3,6 +3,8 @@
 export CLICOLOR=1
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python2"
+
 # Use GNU coreutils instead of system defaults
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 #export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -21,9 +23,9 @@ alias flushdns="sudo dscacheutil -flushcache || true &&
 
 if [ -x /usr/local/opt/coreutils/libexec/gnubin/dircolors ]; then
     if [ -f ~/.dir_colors ]; then
-        eval `dircolors -b ~/.dir_colors`
+        eval `/usr/local/opt/coreutils/libexec/gnubin/dircolors -b ~/.dir_colors`
     else
-        eval `dircolors -b`
+        eval `/usr/local/opt/coreutils/libexec/gnubin/dircolors -b`
     fi
 	alias ls='/usr/local/opt/coreutils/libexec/gnubin/ls --color=auto'
 else
@@ -43,4 +45,8 @@ unset brew_prefix
 
 if which mvim &> /dev/null; then
     alias vim='mvim -v'
+fi
+
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
 fi

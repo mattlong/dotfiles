@@ -26,8 +26,13 @@ alias docker-rm-exited='docker rm $(docker ps -a -f status=exited -q)'
 alias gti='git'
 alias got='git'
 alias g='git'
-alias tidyup-local='git branch --merged  | grep -v "\*" | egrep -v "^(dev|test|master|heramerge)$" | xargs -n1 git branch -d'
-alias tidyup-remote='git branch -r --merged origin/dev | egrep -v "HEAD ->" | sed "s/[ \t]*origin\///" | egrep -v "^(dev|test|master|heramerge)$"'
+
+alias tidyup-local='git branch --merged  | grep -v "\*" | egrep -v "^master$" | xargs -n1 git branch -d'
+alias tidyup-remote='git branch -r --merged origin/master | egrep origin | egrep -v "HEAD ->" | sed "s/[ \t]*origin\///" | egrep -v "^master$"'
+
+# To ignore local changes to a file: https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally
+alias skip-worktree='git update-index --skip-worktree'
+
 #alias very='git'
 #alias much='git'
 #alias such='git'
@@ -44,3 +49,8 @@ alias gpg='gpg2 --display-charset utf-8'
 
 alias grep='grep --exclude-dir=.svn --exclude-dir=.git'
 
+alias trim="awk '{\$1=\$1};1'"
+# alias trim="awk '{$1=$1}1'"
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi

@@ -15,10 +15,16 @@ filetype plugin indent on       " load file type plugins + indentation
 set laststatus=2                " show status line (0 - never, 1 - default, 2 - always)
 set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
 
-if v:version >= 703
-    set relativenumber          " Show relative line numbers
-else
-    set number                  " Show absolute line numbers
+set relativenumber          " Show relative line numbers
+set number                  " Show absolute line numbers
+"if v:version >= 703
+"    set relativenumber          " Show relative line numbers
+"else
+"    set number                  " Show absolute line numbers
+"endif
+
+if exists(':tnoremap')
+    tnoremap <Esc> <C-\><C-n>
 endif
 
 set cursorline                  " highlight current line
@@ -49,12 +55,16 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.o,*.obj,.git,*.pyc,*.class,node_modules,.eg
 
 
 "" Whitespace
-set tabstop=4 shiftwidth=4      " a tab is four spaces
-set expandtab                   " use spaces, not tabs
-set backspace=indent,eol,start  " backspace through everything in insert mode
+set tabstop=2 shiftwidth=2 softtabstop=2  " a tab is four spaces
+set expandtab                             " use spaces, not tabs
+set backspace=indent,eol,start            " backspace through everything in insert mode
 
 "autocmd FileType html setlocal shiftwidth=2 tabstop=2
 "autocmd FileType xhtml setlocal shiftwidth=2 tabstop=2
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType es6 setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType sass setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 "" Searching
 set hlsearch                    " highlight matches
@@ -104,8 +114,15 @@ vmap <Leader>P "+P
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+"let g:syntastic_debug = 25
+"let g:syntastic_debug_file = "~/syntastic.log"
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['python', 'flake8', 'pyflakes']  " to feel bad about yourself, add pylint
+let g:syntastic_html_tidy_ignore_errors = [
+    \  'plain text isn''t allowed in <head> elements'
+    \ ]
+let g:syntastic_scss_checkers      = [ 'sass_lint' ]
+"let g:syntastic_sass_sass_args     = '-I ' . getcwd()
