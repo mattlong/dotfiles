@@ -62,6 +62,7 @@
   ignore = update-index --skip-worktree
   unignore = update-index --no-skip-worktree
   ignored = !git ls-files -v | grep "^[[:lower:]]"
+  current = rev-parse --abbrev-ref HEAD
 [github]
 	site = https://github.com
 	endpoint = https://api.github.com
