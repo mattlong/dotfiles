@@ -3,7 +3,8 @@
 export CLICOLOR=1
 export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 
-export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python2"
+# export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python2"
+export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin/python3"
 
 # Use GNU coreutils instead of system defaults
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
@@ -49,4 +50,9 @@ fi
 
 if which rbenv > /dev/null; then
     eval "$(rbenv init -)"
+fi
+
+export NVM_DIR="$HOME/.nvm"
+if [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
+  source "/usr/local/opt/nvm/nvm.sh"
 fi

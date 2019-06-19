@@ -121,8 +121,12 @@ fi
 export PGDATA="/usr/local/var/postgres"
 
 export GOPATH=$HOME/golang
+
+source $HOME/.local/bin/z.sh
+
 mkdir -p $GOPATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 
 unset rcfiles system
 
