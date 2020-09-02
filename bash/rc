@@ -11,6 +11,10 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
+# let gpg decrypting work
+# Fixes: gpg: signing failed: Inappropriate ioctl for device
+export GPG_TTY=$(tty)
+
 # Set flag if this session is interactive
 if [ -n "$PS1" ]; then
     INTERACTIVE_SESSION=true
@@ -86,12 +90,11 @@ shopt -s cdspell
 
 
 if $INTERACTIVE_SESSION; then
-    # activate virtualenvwrapper
-    if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-        source /usr/local/bin/virtualenvwrapper.sh
-    elif [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
-        source /usr/bin/virtualenvwrapper.sh
-    fi
+    # if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+    #     source /usr/local/bin/virtualenvwrapper.sh
+    # elif [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
+    #     source /usr/bin/virtualenvwrapper.sh
+    # fi
 
     # setup prompt
     GIT_PS1_SHOWDIRTYSTATE=true
@@ -120,13 +123,12 @@ fi
 
 export PGDATA="/usr/local/var/postgres"
 
-export GOPATH=$HOME/golang
 
 source $HOME/.local/bin/z.sh
 
-mkdir -p $GOPATH
+export GOPATH=$HOME/golang
+# mkdir -p $GOPATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 
 unset rcfiles system
 

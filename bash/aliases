@@ -24,6 +24,8 @@ alias docker-rmi-dangling='docker rmi $(docker images -f "dangling=true" -q)'
 #alias docker-rm-exited='exited=$(docker ps -a -f status=exited -q) bash -c '"'"'test -z "$exited" || docker rm "$exited"'"'"''
 alias docker-rm-exited='docker rm $(docker ps -a -f status=exited -q)'
 
+alias tf='terraform'
+
 # git typos
 alias gti='git'
 alias got='git'
@@ -31,6 +33,8 @@ alias g='git'
 
 alias tidyup-local='git branch --merged  | grep -v "\*" | egrep -v "^master$" | xargs -n1 git branch -d'
 alias tidyup-remote='git branch -r --merged origin/master | egrep origin | egrep -v "HEAD ->" | sed "s/[ \t]*origin\///" | egrep -v "^master$"'
+alias rb='git rebase origin/master'
+alias rbi='git rebase -i origin/master'
 
 # To ignore local changes to a file: https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally
 alias skip-worktree='git update-index --skip-worktree'
