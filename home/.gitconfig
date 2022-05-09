@@ -5,6 +5,7 @@
     ui = true
 [core]
     editor = vim
+	attributesfile = /Users/mattlong/.gitattributes
 [branch]
     autosetuprebase = always
 [push]

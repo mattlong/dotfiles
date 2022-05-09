@@ -128,3 +128,5 @@ let g:syntastic_html_tidy_ignore_errors = [
     \ ]
 let g:syntastic_scss_checkers      = [ 'sass_lint' ]
 "let g:syntastic_sass_sass_args     = '-I ' . getcwd()
+
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
